@@ -37,3 +37,24 @@ class PurchaseCreateView(CreateView):
     for requirement in recipe_requirements:
       requirement.ingredient.quantity -= requirement.quantity
     return super().form_valid(form)
+
+class MenuItemListView(ListView):
+  model = MenuItem
+  template_name = "inventory/menu-items.html"
+
+class MenuItemCreateView(CreateView):
+  model = MenuItem
+  template_name = "inventory/add-menu-item.html"
+  form_class = MenuItemForm
+  success_url = "/menu-items"
+
+class MenuItemUpdateView(UpdateView):
+  model = MenuItem
+  template_name = "inventory/update-menu-item.html"
+  form_class = MenuItemForm
+  success_url = "/menu-items"
+
+class MenuItemDeleteView(DeleteView):
+  model = MenuItem
+  template_name = "inventory/delete-menu-item.html"
+  success_url = "/menu-items"
