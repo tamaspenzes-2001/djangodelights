@@ -1,26 +1,23 @@
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 
 # Create your models here.
 
 class Ingredient(models.Model):
-  quantity = models.PositiveIntegerField()
-  price = models.PositiveIntegerField()
+  quantity = models.FloatField()
+  unit = models.CharField(max_length=10)
+  unit_price = models.FloatField()
   name = models.CharField(max_length=30)
 
 class MenuItem(models.Model):
-  price = models.PositiveIntegerField()
+  price = models.FloatField()
   name = models.CharField(max_length=100)
-  ingredients = models.ManyToManyField(Ingredient, through=IngredientsOfMenuItem)
 
 class Purchase(models.Model):
-  time = models.DateTimeField(default=datetime.now())
-  menu_items = models.ManyToManyField(MenuItem, through=PurchasedMenuItems)
+  menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+  timestamp = models.DateTimeField(default=timezone.now())
 
-class PurchasedMenuItems(models.Model):
-  purchase = models.ForeignKey(Purchase)
-  menu_item = models.ForeignKey(MenuItem)
-
-class IngredientsOfMenuItem(models.Model):
-  menu_item = models.ForeignKey(MenuItem)
-  ingredient = models.ForeignKey(Ingredient)
+class RecipeRequirement(models.Model):
+  menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+  ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+  quantity = models.FloatField()
