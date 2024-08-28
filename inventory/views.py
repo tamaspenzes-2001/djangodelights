@@ -42,6 +42,7 @@ class PurchaseCreateView(CreateView):
         return HttpResponse("Not enough ingredients!")
     for requirement in recipe_requirements:
       requirement.ingredient.quantity -= requirement.quantity
+      requirement.ingredient.save()
     return super().form_valid(form)
 
 class MenuItemListView(ListView):
