@@ -43,6 +43,11 @@ class MenuItemListView(ListView):
   model = MenuItem
   template_name = "inventory/menu-items.html"
 
+  def get_context_data(self):
+    context = super().get_context_data()
+    print(context)
+    return context
+
 class MenuItemCreateView(CreateView):
   model = MenuItem
   template_name = "inventory/add-menu-item.html"

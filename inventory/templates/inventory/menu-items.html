@@ -1,0 +1,42 @@
+{% extends 'inventory/base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Django Delights - Menu items</title>
+<script src="https://kit.fontawesome.com/38fe2e90c2.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block body %}
+<h1>Menu items</h1>
+<div class="flex-container">
+  {% for menu_item in object_list %}
+  <div class="card">
+    <div class="card-header">
+      <strong class="menu-name">{{ menu_item }}</strong>
+      <div class="button-container">
+        <a href="{% url 'update_menu_item' menu_item.id %}" class="button edit-button">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+        <a href="{% url 'delete_menu_item' menu_item.id %}" class="button delete-button">
+          <i class="fa-solid fa-trash-can"></i>
+        </a>
+      </div>
+    </div>
+    {% for requirement in menu_item.reciperequirement_set.all %}
+    <p>{{ requirement }}</p>
+    <div class="button-container">
+      <a href="{% url 'update_recipe_requirement' menu_item.name requirement.id %}" class="button edit-button">
+        <i class="fa-solid fa-pencil"></i>
+      </a>
+      <a href="{% url 'delete_recipe_requirement' menu_item.name requirement.id %}" class="button delete-button">
+        <i class="fa-solid fa-trash-can"></i>
+      </a>
+    </div>
+    {% endfor %}
+    <a href="{% url 'add_recipe_requirement' menu_item.name %}" class="button add-button">+ Add requirement</a>
+  </div>
+  {% endfor %}
+</div>
+<a href="{% url 'add_menu_item' %}" class="button add-button">+ Add menu item</a>
+{% endblock %}

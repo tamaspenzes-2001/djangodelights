@@ -14,7 +14,7 @@
     <th>Menu item</th>
     <th>Paid</th>
   </tr>
-  {% for purchase in purchase_list %}
+  {% for purchase in object_list %}
   <tr>
     <td>{{ purchase.timestamp }}</td>
     <td>{{ purchase.menu_item.name }}</td>
@@ -22,7 +22,7 @@
   </tr>
   {% endfor %}
 </table>
-<a href="{% url 'add_purchase' %}" class="add-button">+ Add purchase</a>
+<a href="{% url 'add_purchase' %}" class="button add-button">+ Add purchase</a>
 
 <h1>Financial report</h1>
 <p><strong>Revenue:</strong> {{ revenue|stringformat:".2f" }}</p>

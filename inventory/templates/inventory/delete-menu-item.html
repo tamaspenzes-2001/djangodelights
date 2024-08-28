@@ -1,0 +1,18 @@
+{% extends 'inventory/base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Django Delights - Delete menu item</title>
+{% endblock %}
+
+{% block body %}
+<h1>Delete menu item: {{ menuitem.name }}</h1>
+<p>
+  Are you sure you want to delete {{ menuitem.name }}?
+</p>
+<form action="" method="POST">
+  {% csrf_token %}
+  <input class="button delete-button" type="submit" value="Delete">
+</form>
+{% endblock %}

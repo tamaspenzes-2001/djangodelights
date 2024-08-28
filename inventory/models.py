@@ -32,4 +32,4 @@ class RecipeRequirement(models.Model):
   quantity = models.FloatField()
 
   def __str__(self):
-    return f"{self.quantity} {self.ingredient.unit} of {self.ingredient.name} for {self.menu_item.name}"
+    return f"{self.quantity} {self.ingredient.unit} of {self.ingredient.name}"
