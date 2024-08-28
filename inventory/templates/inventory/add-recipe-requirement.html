@@ -1,0 +1,16 @@
+{% extends 'inventory/base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Django Delights - Add recipe requirement</title>
+{% endblock %}
+
+{% block body %}
+<h1>Add recipe requirement for {{ menu_item }}</h1>
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Add requirement">
+</form>
+{% endblock %}

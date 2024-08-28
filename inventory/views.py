@@ -43,11 +43,6 @@ class MenuItemListView(ListView):
   model = MenuItem
   template_name = "inventory/menu-items.html"
 
-  def get_context_data(self):
-    context = super().get_context_data()
-    print(context)
-    return context
-
 class MenuItemCreateView(CreateView):
   model = MenuItem
   template_name = "inventory/add-menu-item.html"
@@ -71,9 +66,15 @@ class RecipeRequirementCreateView(CreateView):
   form_class = RecipeRequirementForm
   success_url = "/menu-items"
 
+  def get_context_data(self):
+    context = super().get_context_data()
+    context["menu_item"] = self.kwargs["item_name"]
+    return context
+
   def form_valid(self, form):
-    menu_item_name = self.request.GET.get('menu_item_name')
-    menu_item = MenuItem.objects.get(title=menu_item_name)
+    menu_item_name = self.kwargs["item_name"]
+    print(menu_item_name)
+    menu_item = MenuItem.objects.get(name=menu_item_name)
     form.instance.menu_item = menu_item
     return super().form_valid(form)
 
@@ -83,10 +84,21 @@ class RecipeRequirementUpdateView(UpdateView):
   form_class = RecipeRequirementForm
   success_url = "/menu-items"
 
+  def get_context_data(self):
+    context = super().get_context_data()
+    context["menu_item"] = self.kwargs["item_name"]
+    return context
+
 class RecipeRequirementDeleteView(DeleteView):
   model = RecipeRequirement
   template_name = "inventory/delete-recipe-requirement.html"
   success_url = "/menu-items"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data()
+    context["menu_item"] = self.kwargs["item_name"]
+    print(context)
+    return context
 
 class IngredientListView(ListView):
   model = Ingredient
