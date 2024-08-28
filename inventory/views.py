@@ -58,3 +58,26 @@ class MenuItemDeleteView(DeleteView):
   model = MenuItem
   template_name = "inventory/delete-menu-item.html"
   success_url = "/menu-items"
+
+class RecipeRequirementCreateView(CreateView):
+  model = RecipeRequirement
+  template_name = "inventory/add-recipe-requirement.html"
+  form_class = RecipeRequirementForm
+  success_url = "/menu-items"
+
+  def form_valid(self, form):
+    menu_item_name = self.request.GET.get('menu_item_name')
+    todo_list = TodoList.objects.get(title=menu_item_name)
+    form.instance.todo_list = todo_list
+    return super().form_valid(form)
+
+class RecipeRequirementUpdateView(UpdateView):
+  model = RecipeRequirement
+  template_name = "inventory/update-recipe-requirement.html"
+  form_class = RecipeRequirementForm
+  success_url = "/menu-items"
+
+class RecipeRequirementDeleteView(DeleteView):
+  model = RecipeRequirement
+  template_name = "inventory/delete-recipe-requirement.html"
+  success_url = "/menu-items"
