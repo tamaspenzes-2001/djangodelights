@@ -67,8 +67,8 @@ class RecipeRequirementCreateView(CreateView):
 
   def form_valid(self, form):
     menu_item_name = self.request.GET.get('menu_item_name')
-    todo_list = TodoList.objects.get(title=menu_item_name)
-    form.instance.todo_list = todo_list
+    menu_item = MenuItem.objects.get(title=menu_item_name)
+    form.instance.menu_item = menu_item
     return super().form_valid(form)
 
 class RecipeRequirementUpdateView(UpdateView):
