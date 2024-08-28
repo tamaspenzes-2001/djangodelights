@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'inventory/base.html' %}
 
 {% load static %}
 
@@ -14,18 +14,18 @@
     <th>Menu item</th>
     <th>Paid</th>
   </tr>
-  {% for purchase in purchases %}
+  {% for purchase in purchase_list %}
   <tr>
     <td>{{ purchase.timestamp }}</td>
     <td>{{ purchase.menu_item.name }}</td>
-    <td>${{ purchase.menu_item.price }}</td>
+    <td>${{ purchase.menu_item.price|stringformat:".2f" }}</td>
   </tr>
-  {% endif %}
+  {% endfor %}
 </table>
-<a href="{% url 'add_purchase' }" class="add-button">+ Add purchase</a>
+<a href="{% url 'add_purchase' %}" class="add-button">+ Add purchase</a>
 
 <h1>Financial report</h1>
-<p><strong>Revenue:</strong> {{ revenue }}</p>
-<p><strong>Cost:</strong> {{ cost }}</p>
-<p><strong>Profit:</strong> {{ profit }}</p>
+<p><strong>Revenue:</strong> {{ revenue|stringformat:".2f" }}</p>
+<p><strong>Cost:</strong> {{ cost|stringformat:".2f" }}</p>
+<p><strong>Profit:</strong> {{ profit|stringformat:".2f" }}</p>
 {% endblock %}

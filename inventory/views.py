@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import *
+from .forms import *
 from django.db.models import Sum
 
 # Create your views here.
@@ -17,7 +18,7 @@ class PurchaseListView(ListView):
       menu_item_instance = purchase.menu_item
       recipe_requirements = RecipeRequirement.objects.filter(menu_item=menu_item_instance)
       for requirement in recipe_requirements:
-        cost += requirement.ingredient.price * requirement.quantity
+        cost += requirement.ingredient.unit_price * requirement.quantity
     context["cost"] = cost
     context["profit"] = context["revenue"] - context["cost"]
     return context
