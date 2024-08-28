@@ -13,14 +13,19 @@ class PurchaseListView(ListView):
   def get_context_data(self):
     context = super().get_context_data()
     context["revenue"] = Purchase.objects.aggregate(revenue=Sum("menu_item__price"))["revenue"]
-    cost = 0
-    for purchase in Purchase.objects.all():
-      menu_item_instance = purchase.menu_item
-      recipe_requirements = RecipeRequirement.objects.filter(menu_item=menu_item_instance)
-      for requirement in recipe_requirements:
-        cost += requirement.ingredient.unit_price * requirement.quantity
-    context["cost"] = cost
-    context["profit"] = context["revenue"] - context["cost"]
+    if context["revenue"] is None:
+      context["revenue"] = 0
+      context["cost"] = 0
+      context["profit"] = 0
+    else:
+      cost = 0
+      for purchase in Purchase.objects.all():
+        menu_item_instance = purchase.menu_item
+        recipe_requirements = RecipeRequirement.objects.filter(menu_item=menu_item_instance)
+        for requirement in recipe_requirements:
+          cost += requirement.ingredient.unit_price * requirement.quantity
+      context["cost"] = cost
+      context["profit"] = context["revenue"] - context["cost"]
     return context
 
 class PurchaseCreateView(CreateView):
@@ -119,3 +124,4 @@ class IngredientUpdateView(UpdateView):
 class IngredientDeleteView(DeleteView):
   model = Ingredient
   template_name = "inventory/delete-ingredient.html"
+  success_url = "/ingredients"

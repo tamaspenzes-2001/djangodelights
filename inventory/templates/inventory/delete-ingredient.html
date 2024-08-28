@@ -1,0 +1,19 @@
+{% extends 'inventory/base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Django Delights - Delete ingredient</title>
+{% endblock %}
+
+{% block body %}
+<h1>Delete ingredient: {{ ingredient.name }}</h1>
+<p>
+  Are you sure you want to delete {{ ingredient.name }}?
+  It will also disappear from recipe requirements of menu items!
+</p>
+<form action="" method="POST">
+  {% csrf_token %}
+  <input class="button delete-button" type="submit" value="Delete">
+</form>
+{% endblock %}
