@@ -10,5 +10,9 @@ urlpatterns = [
     path('/menu-items/<pk>/delete', MenuItemDeleteView.as_view(), name="delete_menu_item"),
     path('/menu-items/<item_name>/recipe-requirements/add', RecipeRequirementCreateView.as_view(), name="add_recipe_requirement"),
     path('/menu-items/<item_name>/recipe-requirements/<pk>/update', RecipeRequirementUpdateView.as_view(), name="update_recipe_requirement"),
-    path('/menu-items/<item_name>/recipe-requirements/<pk>/delete', RecipeRequirementDeleteView.as_view(), name="delete_recipe_requirement")
+    path('/menu-items/<item_name>/recipe-requirements/<pk>/delete', RecipeRequirementDeleteView.as_view(), name="delete_recipe_requirement"),
+    path('/ingredients', IngredientListView.as_view(), name="ingredients"),
+    path('/ingredients/add', IngredientCreateView.as_view(), name="add_ingredient"),
+    path('/ingredients/<pk>/update', IngredientUpdateView.as_view(), name="update_ingredient"),
+    path('/ingredients/<pk>/delete', IngredientDeleteView.as_view(), name="delete_ingredient")
 ]
