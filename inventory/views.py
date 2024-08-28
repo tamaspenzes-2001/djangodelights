@@ -24,7 +24,7 @@ class PurchaseListView(ListView):
 
 class PurchaseCreateView(CreateView):
   model = Purchase
-  template_name = "inventory/add_purchase.html"
+  template_name = "inventory/add-purchase.html"
   form_class = PurchaseForm
   success_url = "/"
 

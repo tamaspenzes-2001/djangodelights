@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Django Delights - Add purchase</title>
+{% endblock %}
+
+{% block body %}
+<h1>Add purchase</h1>
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Add purchase">
+{% endblock %}

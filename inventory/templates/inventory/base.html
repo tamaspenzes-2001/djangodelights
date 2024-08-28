@@ -1,24 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'inventory/style.css' %}" />
   {% block head %}
   {% endblock %}
 </head>
 <body>
-  <nav>
-    <a href="{% url 'purchases' %}" class="nav-item{% if request.path == purchases_url %} nav-item--active{% endif %}">
-      Purchases
-    </a>
-    <a href="{% url 'menu_items' %}" class="nav-item{% if request.path == menu_items_url %} nav-item--active{% endif %}">
-      Menu items
-    </a>
-    <a href="{% url 'ingredients' %}" class="nav-item{% if request.path == ingredients_url %} nav-item--active{% endif %}">
-      Ingredients
-    </a>
-  </nav>
-  {% block body %}
-  {% endblock %}
+  <div class="content-wrapper">
+    <nav>
+      <a href="{% url 'purchases' %}" class="nav-item{% if request.path == purchases_url %} nav-item--active{% endif %}">
+        Purchases
+      </a>
+      <a href="{% url 'menu_items' %}" class="nav-item{% if request.path == menu_items_url %} nav-item--active{% endif %}">
+        Menu items
+      </a>
+      <a href="{% url 'ingredients' %}" class="nav-item{% if request.path == ingredients_url %} nav-item--active{% endif %}">
+        Ingredients
+      </a>
+    </nav>
+    {% block body %}
+    {% endblock %}
+  </div>
 </body>
 </html>

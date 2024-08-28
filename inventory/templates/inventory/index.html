@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Django Delights - Purchases</title>
+{% endblock %}
+
+{% block body %}
+<h1>Purchases</h1>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Menu item</th>
+    <th>Paid</th>
+  </tr>
+  {% for purchase in purchases %}
+  <tr>
+    <td>{{ purchase.timestamp }}</td>
+    <td>{{ purchase.menu_item.name }}</td>
+    <td>${{ purchase.menu_item.price }}</td>
+  </tr>
+  {% endif %}
+</table>
+<a href="{% url 'add_purchase' }" class="add-button">+ Add purchase</a>
+
+<h1>Financial report</h1>
+<p><strong>Revenue:</strong> {{ revenue }}</p>
+<p><strong>Cost:</strong> {{ cost }}</p>
+<p><strong>Profit:</strong> {{ profit }}</p>
+{% endblock %}
