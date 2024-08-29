@@ -8,24 +8,26 @@
 
 {% block body %}
 <h1>Purchases</h1>
-<table>
-  <tr>
-    <th>Date</th>
-    <th>Menu item</th>
-    <th>Paid</th>
-  </tr>
-  {% for purchase in object_list %}
-  <tr>
-    <td>{{ purchase.timestamp }}</td>
-    <td>{{ purchase.menu_item.name }}</td>
-    <td>${{ purchase.menu_item.price|stringformat:".2f" }}</td>
-  </tr>
-  {% endfor %}
-</table>
-<a href="{% url 'add_purchase' %}" class="button add-button">+ Add purchase</a>
+<div class="table-wrapper">
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Menu item</th>
+      <th>Paid</th>
+    </tr>
+    {% for purchase in object_list %}
+    <tr>
+      <td>{{ purchase.timestamp }}</td>
+      <td>{{ purchase.menu_item.name }}</td>
+      <td>${{ purchase.menu_item.price|stringformat:".2f" }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<a href="{% url 'add_purchase' %}" class="button button--full-width">+ Add purchase</a>
 
 <h1>Financial report</h1>
-<p><strong>Revenue:</strong> ${{ revenue|stringformat:".2f" }}</p>
-<p><strong>Cost:</strong> ${{ cost|stringformat:".2f" }}</p>
-<p><strong>Profit:</strong> ${{ profit|stringformat:".2f" }}</p>
+<p class="financial-report-p"><strong>Revenue:</strong> ${{ revenue|stringformat:".2f" }}</p>
+<p class="financial-report-p"><strong>Cost:</strong> ${{ cost|stringformat:".2f" }}</p>
+<p class="financial-report-p"><strong>Profit:</strong> ${{ profit|stringformat:".2f" }}</p>
 {% endblock %}

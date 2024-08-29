@@ -9,32 +9,34 @@
 
 {% block body %}
 <h1>Ingredients</h1>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Unit</th>
-    <th>Unit price</th>
-    <th>Quantity</th>
-    <th>Edit/Delete</th>
-  </tr>
-  {% for ingredient in object_list %}
-  <tr>
-    <td>{{ ingredient.name }}</td>
-    <td>{{ ingredient.unit }}</td>
-    <td>${{ ingredient.unit_price|stringformat:".2f" }}</td>
-    <td>{{ ingredient.quantity }}</td>
-    <td>
-      <div class="button-container">
-        <a href="{% url 'update_ingredient' ingredient.id %}" class="button edit-button">
-          <i class="fa-solid fa-pencil"></i>
-        </a>
-        <a href="{% url 'delete_ingredient' ingredient.id %}" class="button delete-button">
-          <i class="fa-solid fa-trash-can"></i>
-        </a>
-      </div>
-    </td>
-  </tr>
-  {% endfor %}
-</table>
-<a href="{% url 'add_ingredient' %}" class="button add-button">+ Add ingredient</a>
+<div class="table-wrapper">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Unit</th>
+      <th>Unit price</th>
+      <th>Quantity</th>
+      <th>Edit/Delete</th>
+    </tr>
+    {% for ingredient in object_list %}
+    <tr>
+      <td>{{ ingredient.name }}</td>
+      <td>{{ ingredient.unit }}</td>
+      <td>${{ ingredient.unit_price|stringformat:".2f" }}</td>
+      <td>{{ ingredient.quantity }}</td>
+      <td>
+        <div class="button-container">
+          <a href="{% url 'update_ingredient' ingredient.id %}" class="button button--edit">
+            <i class="fa-solid fa-pencil"></i>
+          </a>
+          <a href="{% url 'delete_ingredient' ingredient.id %}" class="button button--delete">
+            <i class="fa-solid fa-trash-can"></i>
+          </a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<a href="{% url 'add_ingredient' %}" class="button button--full-width">+ Add ingredient</a>
 {% endblock %}

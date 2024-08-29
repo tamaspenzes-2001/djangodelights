@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0.5rem;
+  overflow: hidden;
+  background-color: #666666;
+}
+
+h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+
+p, a, h1, strong {
+  color: #1E1E1E;
+}
+
+.content-wrapper {
+  background-color: #D9D9D9;
+  padding: 1rem;
+}
+
+.nav-item {
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+.nav-item--active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.button {
+  border: 0;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: serif;
+  padding: 0.5rem;
+  color: #F0F0F0;
+  background-color: #666666;
+}
+
+.button--full-width {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+
+/* LIST VIEW TEMPLATES */
+.table-wrapper {
+  border-collapse: collapse;
+  max-height: 50vh;
+  overflow: scroll;
+}
+
+th, td {
+  max-width: 20rem;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 0.1rem solid #1E1E1E;
+}
+
+.button--edit {
+  background-color: #5964C2;
+  margin-right: 0.3rem;
+  padding: 0.3rem;
+  padding-right: 0;
+  font-size: 1.3rem;
+}
+
+.button--delete {
+  background-color: #CB3C3C;
+  padding: 0.3rem 0.4rem;
+  font-size: 1.3rem;
+}
+
+
+/* LIST VIEW TEMPLATES - PURCHASES */
+.financial-report-p {
+  text-align: center;
+  line-height: 1.5;
+}
+
+
+/* LIST VIEW TEMPLATES - MENU ITEMS */
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #EEEEEE;
+  padding: 0.5rem;
+  border: 0.1rem solid #1E1E1E;
+  margin-bottom: 1rem;
+  width: 48%;
+}
+
+@media (max-width: 550px) {
+  .card {
+    width: 100%;
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0 0.8rem;
+  border-bottom: 0.1rem solid #1E1E1E;
+  margin-bottom: 0.5rem;
+}
+
+.menu-name {
+  width: calc(100% - 5rem);
+}
+
+.requirement-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0 0.8rem;
+}
+
+.requirement-p {
+  width: calc(100% - 5rem);
+}
+
+
+/* OTHER VIEW TEMPLATES */
+.form-field {
+  display: block;
+  width: 100%;
+  background-color: #F6F6F6;
+  border: 0;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.button--delete-confirmation {
+  background-color: #CB3C3C;
+}

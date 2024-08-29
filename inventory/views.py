@@ -11,8 +11,8 @@ class PurchaseListView(ListView):
   model = Purchase
   template_name = "inventory/index.html"
 
-  def get_context_data(self):
-    context = super().get_context_data()
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
     context["revenue"] = Purchase.objects.aggregate(revenue=Sum("menu_item__price"))["revenue"]
     if context["revenue"] is None:
       context["revenue"] = 0
@@ -27,6 +27,7 @@ class PurchaseListView(ListView):
           cost += requirement.ingredient.unit_price * requirement.quantity
       context["cost"] = cost
       context["profit"] = context["revenue"] - context["cost"]
+    context['active_page'] = self.request.path
     return context
 
 class PurchaseCreateView(CreateView):
@@ -50,6 +51,11 @@ class PurchaseCreateView(CreateView):
 class MenuItemListView(ListView):
   model = MenuItem
   template_name = "inventory/menu-items.html"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['active_page'] = self.request.path
+    return context
 
 class MenuItemCreateView(CreateView):
   model = MenuItem
@@ -111,6 +117,11 @@ class RecipeRequirementDeleteView(DeleteView):
 class IngredientListView(ListView):
   model = Ingredient
   template_name = "inventory/ingredients.html"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['active_page'] = self.request.path
+    return context
 
 class IngredientCreateView(CreateView):
   model = Ingredient
