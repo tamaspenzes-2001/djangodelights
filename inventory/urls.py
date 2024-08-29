@@ -1,7 +1,11 @@
 from django.urls import path
 from .views import *
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('accounts/signup', SignUp.as_view(), name="signup"),
+    path('accounts/login/', auth_views.LoginView.as_view(), name="login"),
+    path('accounts/logout', logout_view, name="logout"),
     path('', PurchaseListView.as_view(), name="purchases"),
     path('add-purchase', PurchaseCreateView.as_view(), name="add_purchase"),
     path('menu-items', MenuItemListView.as_view(), name="menu_items"),

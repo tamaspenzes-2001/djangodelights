@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'inventory/style.css' %}" />
+  <title>Django Delights - Login</title>
+</head>
+<body>
+  <div class="content-wrapper">
+    <h1 class="account-h">Please login</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button class="button button--full-width" type="submit">Login</button>
+    </form>
+    <h1>Don't have an account?</h1>
+    <a href="{% url 'signup' %}" class="button button--full-width">Signup</a>
+  </div>
+</body>
+</html>

@@ -10,17 +10,22 @@
 </head>
 <body>
   <div class="content-wrapper">
-    <nav>
-      <a href="{% url 'purchases' %}" class="nav-item{% if active_page|lower == '/'|lower %} nav-item--active{% endif %}">
-        Purchases
+    <header>
+      <nav>
+        <a href="{% url 'purchases' %}" class="nav-item{% if active_page|lower == '/'|lower %} nav-item--active{% endif %}">
+          Purchases
+        </a>
+        <a href="{% url 'menu_items' %}" class="nav-item{% if active_page|lower == '/menu-items'|lower %} nav-item--active{% endif %}">
+          Menu items
+        </a>
+        <a href="{% url 'ingredients' %}" class="nav-item{% if active_page|lower == '/ingredients'|lower %} nav-item--active{% endif %}">
+          Ingredients
+        </a>
+      </nav>
+      <a href="{% url 'logout' %}" class="nav-item">
+        Logout
       </a>
-      <a href="{% url 'menu_items' %}" class="nav-item{% if active_page|lower == '/menu-items'|lower %} nav-item--active{% endif %}">
-        Menu items
-      </a>
-      <a href="{% url 'ingredients' %}" class="nav-item{% if active_page|lower == '/ingredients'|lower %} nav-item--active{% endif %}">
-        Ingredients
-      </a>
-    </nav>
+    </header>
     {% block body %}
     {% endblock %}
   </div>

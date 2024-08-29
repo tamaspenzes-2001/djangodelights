@@ -1,13 +1,17 @@
 from django.http import HttpResponse
 from django.contrib import messages
+from django.shortcuts import redirect
+from django.contrib.auth import logout
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 from .forms import *
 from django.db.models import Sum
 
-# Create your views here.
-class PurchaseListView(ListView):
+class PurchaseListView(LoginRequiredMixin, ListView):
   model = Purchase
   template_name = "inventory/index.html"
 
@@ -30,7 +34,7 @@ class PurchaseListView(ListView):
     context['active_page'] = self.request.path
     return context
 
-class PurchaseCreateView(CreateView):
+class PurchaseCreateView(LoginRequiredMixin, CreateView):
   model = Purchase
   template_name = "inventory/add-purchase.html"
   form_class = PurchaseForm
@@ -48,7 +52,7 @@ class PurchaseCreateView(CreateView):
       requirement.ingredient.save()
     return super().form_valid(form)
 
-class MenuItemListView(ListView):
+class MenuItemListView(LoginRequiredMixin, ListView):
   model = MenuItem
   template_name = "inventory/menu-items.html"
 
@@ -57,24 +61,24 @@ class MenuItemListView(ListView):
     context['active_page'] = self.request.path
     return context
 
-class MenuItemCreateView(CreateView):
+class MenuItemCreateView(LoginRequiredMixin, CreateView):
   model = MenuItem
   template_name = "inventory/add-menu-item.html"
   form_class = MenuItemForm
   success_url = "/menu-items"
 
-class MenuItemUpdateView(UpdateView):
+class MenuItemUpdateView(LoginRequiredMixin, UpdateView):
   model = MenuItem
   template_name = "inventory/update-menu-item.html"
   form_class = MenuItemForm
   success_url = "/menu-items"
 
-class MenuItemDeleteView(DeleteView):
+class MenuItemDeleteView(LoginRequiredMixin, DeleteView):
   model = MenuItem
   template_name = "inventory/delete-menu-item.html"
   success_url = "/menu-items"
 
-class RecipeRequirementCreateView(CreateView):
+class RecipeRequirementCreateView(LoginRequiredMixin, CreateView):
   model = RecipeRequirement
   template_name = "inventory/add-recipe-requirement.html"
   form_class = RecipeRequirementForm
@@ -92,7 +96,7 @@ class RecipeRequirementCreateView(CreateView):
     form.instance.menu_item = menu_item
     return super().form_valid(form)
 
-class RecipeRequirementUpdateView(UpdateView):
+class RecipeRequirementUpdateView(LoginRequiredMixin, UpdateView):
   model = RecipeRequirement
   template_name = "inventory/update-recipe-requirement.html"
   form_class = RecipeRequirementForm
@@ -103,7 +107,7 @@ class RecipeRequirementUpdateView(UpdateView):
     context["menu_item"] = self.kwargs["item_name"]
     return context
 
-class RecipeRequirementDeleteView(DeleteView):
+class RecipeRequirementDeleteView(LoginRequiredMixin, DeleteView):
   model = RecipeRequirement
   template_name = "inventory/delete-recipe-requirement.html"
   success_url = "/menu-items"
@@ -114,7 +118,7 @@ class RecipeRequirementDeleteView(DeleteView):
     print(context)
     return context
 
-class IngredientListView(ListView):
+class IngredientListView(LoginRequiredMixin, ListView):
   model = Ingredient
   template_name = "inventory/ingredients.html"
 
@@ -123,19 +127,28 @@ class IngredientListView(ListView):
     context['active_page'] = self.request.path
     return context
 
-class IngredientCreateView(CreateView):
+class IngredientCreateView(LoginRequiredMixin, CreateView):
   model = Ingredient
   template_name = "inventory/add-ingredient.html"
   form_class = IngredientForm
   success_url = "/ingredients"
 
-class IngredientUpdateView(UpdateView):
+class IngredientUpdateView(LoginRequiredMixin, UpdateView):
   model = Ingredient
   template_name = "inventory/update-ingredient.html"
   form_class = IngredientForm
   success_url = "/ingredients"
 
-class IngredientDeleteView(DeleteView):
+class IngredientDeleteView(LoginRequiredMixin, DeleteView):
   model = Ingredient
   template_name = "inventory/delete-ingredient.html"
   success_url = "/ingredients"
+
+class SignUp(CreateView):
+  form_class = UserCreationForm
+  success_url = reverse_lazy("login")
+  template_name = "registration/signup.html"
+
+def logout_view(request):
+  logout(request)
+  return redirect("/")

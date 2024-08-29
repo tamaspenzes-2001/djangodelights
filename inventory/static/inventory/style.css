@@ -29,6 +29,11 @@ p, a, h1, strong {
   padding: 1rem;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .nav-item {
   text-decoration: none;
   margin-right: 1rem;
@@ -143,7 +148,11 @@ th, td {
 
 
 /* OTHER VIEW TEMPLATES */
-.form-field {
+label {
+  font-weight: bold;
+}
+
+input:not([type="submit"]), select {
   display: block;
   width: 100%;
   background-color: #F6F6F6;
@@ -154,4 +163,10 @@ th, td {
 
 .button--delete-confirmation {
   background-color: #CB3C3C;
+}
+
+
+/* LOGIN AND SIGNUP PAGE */
+.account-h {
+  margin-top: 0;
 }
