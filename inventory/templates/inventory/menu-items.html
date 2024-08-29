@@ -9,10 +9,10 @@
 
 {% block body %}
 <h1>Menu items</h1>
-<div class="card-container">
+<div class="card-container flex-space-between">
   {% for menu_item in object_list %}
   <div class="card">
-    <div class="card-header">
+    <div class="card-header flex-space-between">
       <strong class="menu-name">{{ menu_item }}</strong>
       <div class="inline-block">
         <a href="{% url 'update_menu_item' menu_item.id %}" class="button button--edit">
@@ -24,7 +24,7 @@
       </div>
     </div>
     {% for requirement in menu_item.reciperequirement_set.all %}
-    <div class="requirement-container">
+    <div class="requirement-container flex-space-between">
       <p class="requirement-p">{{ requirement }}</p>
       <div class="inline-block">
         <a href="{% url 'update_recipe_requirement' menu_item.name requirement.id %}" class="button button--edit">

@@ -29,11 +29,6 @@ p, a, h1, strong {
   padding: 1rem;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-}
-
 .nav-item {
   text-decoration: none;
   margin-right: 1rem;
@@ -62,8 +57,15 @@ header {
   margin-top: 0.5rem;
 }
 
+/* helper classes */
+
 .inline-block {
   display: inline-block;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
 }
 
 
@@ -105,8 +107,6 @@ th, td {
 
 /* LIST VIEW TEMPLATES - MENU ITEMS */
 .card-container {
-  display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -125,8 +125,6 @@ th, td {
 }
 
 .card-header {
-  display: flex;
-  justify-content: space-between;
   padding: 0.3rem 0 0.8rem;
   border-bottom: 0.1rem solid #1E1E1E;
   margin-bottom: 0.5rem;
@@ -137,8 +135,6 @@ th, td {
 }
 
 .requirement-container {
-  display: flex;
-  justify-content: space-between;
   padding: 0.3rem 0 0.8rem;
 }
 
