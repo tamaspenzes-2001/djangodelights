@@ -11,6 +11,13 @@
 <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
+  {% if messages %}
+    {% for msg in messages %}
+        <div class="error-message">
+            {{ msg }}
+        </div>
+    {% endfor %}
+  {% endif %}
   <input type="submit" value="Add purchase">
 </form>
 {% endblock %}

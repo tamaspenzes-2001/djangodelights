@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.contrib import messages
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import *
@@ -39,7 +40,8 @@ class PurchaseCreateView(CreateView):
     recipe_requirements = RecipeRequirement.objects.filter(menu_item=menu_item_instance)
     for requirement in recipe_requirements:
       if requirement.ingredient.quantity < requirement.quantity:
-        return HttpResponse("Not enough ingredients!")
+        messages.error(self.request, 'Not enough ingredients!')
+        return self.render_to_response(self.get_context_data(form=form))
     for requirement in recipe_requirements:
       requirement.ingredient.quantity -= requirement.quantity
       requirement.ingredient.save()
