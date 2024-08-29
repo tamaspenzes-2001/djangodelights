@@ -8,22 +8,28 @@
 
 {% block body %}
 <h1>Purchases</h1>
+
 <div class="table-wrapper">
   <table>
-    <tr>
-      <th>Date</th>
-      <th>Menu item</th>
-      <th>Paid</th>
-    </tr>
-    {% for purchase in object_list %}
-    <tr>
-      <td>{{ purchase.timestamp }}</td>
-      <td>{{ purchase.menu_item.name }}</td>
-      <td>${{ purchase.menu_item.price|stringformat:".2f" }}</td>
-    </tr>
-    {% endfor %}
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Menu item</th>
+        <th>Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for purchase in object_list %}
+      <tr>
+        <td>{{ purchase.timestamp }}</td>
+        <td>{{ purchase.menu_item.name }}</td>
+        <td>${{ purchase.menu_item.price|stringformat:".2f" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
   </table>
 </div>
+
 <a href="{% url 'add_purchase' %}" class="button button--full-width">+ Add purchase</a>
 
 <h1>Financial report</h1>

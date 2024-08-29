@@ -71,9 +71,18 @@ p, a, h1, strong {
 
 /* LIST VIEW TEMPLATES */
 .table-wrapper {
-  border-collapse: collapse;
+  overflow-y: auto;
   max-height: 50vh;
-  overflow: scroll;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background-color: #D9D9D9;
 }
 
 th, td {
